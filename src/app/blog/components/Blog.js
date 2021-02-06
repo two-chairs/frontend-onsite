@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,24 +10,36 @@ import { blogState } from "../state/blogSlice";
 const Blog = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.blog.posts);
-  const [countToShow] = useState(5);
+  const [countToShow] = useState(10);
+  const [pageIndex, setPageIndex] = useState(1);
 
+  const getPosts = async (count, pageIndex) =>
+    fetch(
+      `http://localhost:3004/data/frontend-challenge/getPosts?count=${count}&page=${pageIndex}`
+    ).then((res) => res.json());
+
+  // get initial set of posts
   useEffect(() => {
-    if (posts.length < countToShow) {
-      fetch(
-        `http://localhost:3004/data/frontend-challenge/posts?count=5&page=1`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch(blogState.actions.loadPosts(data));
-        });
-    }
-  }, [countToShow, dispatch, posts]);
+    getPosts(countToShow).then((data) => {
+      dispatch(blogState.actions.loadPosts(data));
+    });
+  }, []);
+
+  const loadMorePosts = () => {
+    const nextPageIndex = pageIndex + 1;
+    getPosts(countToShow, nextPageIndex).then((data) => {
+      dispatch(blogState.actions.loadPosts(data));
+      setPageIndex(nextPageIndex);
+    });
+  }
 
   return (
     <>
-      <BlogHeader />
+      <BlogHeader posts={posts} />
       <BlogListing posts={posts} />
+      <BlogFooter>
+        <button onClick={loadMorePosts}>Load More Posts</button>
+      </BlogFooter>
     </>
   );
 };
@@ -53,5 +67,15 @@ const BlogHeaderWrapper = styled.header`
     margin: auto;
   }
 `;
+
+const BlogFooter = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  > button {
+    font-size: 24px;
+  }
+`;
+
 
 export default Blog;
