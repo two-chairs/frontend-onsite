@@ -31,7 +31,7 @@ const Blog = () => {
       dispatch(blogState.actions.loadPosts(data));
       setPageIndex(nextPageIndex);
     });
-  }
+  };
 
   return (
     <>
@@ -76,6 +76,5 @@ const BlogFooter = styled.div`
     font-size: 24px;
   }
 `;
-
 
 export default Blog;

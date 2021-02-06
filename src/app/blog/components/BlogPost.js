@@ -12,15 +12,17 @@ const BlogPost = (props) => {
       `http://localhost:3004/data/frontend-challenge/getCommentsBulk?postIds=${post.id}`
     )
       .then((res) => res.json())
-      .then((data) => { 
-          const thisPostsComments = data[post.id];
-            dispatch(blogState.actions.loadComments(thisPostsComments));
+      .then((data) => {
+        const thisPostsComments = data[post.id];
+        dispatch(blogState.actions.loadComments(thisPostsComments));
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const comments = useSelector((state) => state.blog.comments);
-  const thisPostsComments = comments.filter(comment => comment.postId === post.id);
+  const thisPostsComments = comments.filter(
+    (comment) => comment.postId === post.id
+  );
 
   return (
     <PostWrapper>
