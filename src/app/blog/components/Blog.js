@@ -39,7 +39,11 @@ const Blog = () => {
       <BlogHeader posts={posts} />
       <BlogListing posts={posts} />
       <BlogFooter>
-        <LoadMoreButton posts={posts} loadMorePosts={loadMorePosts} title="Load Some More Posts" />
+        <LoadMoreButton
+          posts={posts}
+          loadMorePosts={loadMorePosts}
+          title="Load Some More Posts"
+        />
       </BlogFooter>
     </>
   );
