@@ -3,8 +3,7 @@ import styled from "styled-components";
 import BlogPost from "./BlogPost";
 
 const BlogListing = (props) => {
-  const { posts } = props;
-  console.log(posts);
+  const { posts } = props;  
 
   const postsData = posts || [];
 
@@ -12,7 +11,7 @@ const BlogListing = (props) => {
     <BlogListingWrapper>
       <BlogListingGrid>
         {postsData.map((post) => (
-          <BlogPost post={post} />
+          <BlogPost post={post} key={Math.floor(Math.random() * 100)} />
         ))}
       </BlogListingGrid>
     </BlogListingWrapper>

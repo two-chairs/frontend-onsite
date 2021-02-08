@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { primary } from "../../../_constants/colors";
 import BlogListing from "./BlogListing";
+import LoadMoreButton from "./LoadMoreButton";
 import { blogState } from "../state/blogSlice";
 
 const Blog = () => {
@@ -38,7 +39,7 @@ const Blog = () => {
       <BlogHeader posts={posts} />
       <BlogListing posts={posts} />
       <BlogFooter>
-        <button onClick={loadMorePosts}>Load More Posts</button>
+        <LoadMoreButton posts={posts} loadMorePosts={loadMorePosts} title="Load Some More Posts" />
       </BlogFooter>
     </>
   );
