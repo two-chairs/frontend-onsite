@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import colors from './_constants/colors';
-import Blog from './app/blog/components/Blog';
+import React from "react";
+import styled from "styled-components";
+import colors from "./_constants/colors";
+import Blog from "./app/blog/components/Blog";
 
 function App() {
   return (

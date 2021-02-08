@@ -3,7 +3,7 @@ import styled from "styled-components";
 import BlogPost from "./BlogPost";
 
 const BlogListing = (props) => {
-  const { posts } = props;  
+  const { posts } = props;
 
   const postsData = posts || [];
 
