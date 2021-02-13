@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { blogState } from "../state/blogSlice";
+import { apiUrl } from "../../../_constants/globals";
 
 const BlogPost = (props) => {
   const { post } = props;
@@ -9,7 +10,7 @@ const BlogPost = (props) => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:3004/data/frontend-challenge/getCommentsBulk?postIds=${post.id}`
+      `${apiUrl}/data/frontend-challenge/getCommentsBulk?postIds=${post.id}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -24,6 +25,8 @@ const BlogPost = (props) => {
     (comment) => comment.postId === post.id
   );
 
+
+
   return (
     <PostWrapper>
       <img src={post.images.cover} alt="some alt" />
@@ -33,7 +36,7 @@ const BlogPost = (props) => {
         <div style={{ marginTop: "auto", fontSize: "10pt" }}>{post.author}</div>
       </PostContent>
       <PostFooter>
-        <span>Comments: {thisPostsComments.length}</span>
+        {thisPostsComments.length > 0 && <span>Comments: {thisPostsComments.length}</span>}
       </PostFooter>
     </PostWrapper>
   );

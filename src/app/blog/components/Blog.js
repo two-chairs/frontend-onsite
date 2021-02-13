@@ -7,6 +7,7 @@ import { primary } from "../../../_constants/colors";
 import BlogListing from "./BlogListing";
 import LoadMoreButton from "./LoadMoreButton";
 import { blogState } from "../state/blogSlice";
+import { apiUrl } from "../../../_constants/globals";
 
 const Blog = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Blog = () => {
 
   const getPosts = async (count, pageIndex) =>
     fetch(
-      `http://localhost:3004/data/frontend-challenge/getPosts?count=${count}&page=${pageIndex}`
+      `${apiUrl}/data/frontend-challenge/getPosts?count=${count}&page=${pageIndex}`
     ).then((res) => res.json());
 
   // get initial set of posts
